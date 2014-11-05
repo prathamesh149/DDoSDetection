@@ -51,8 +51,7 @@ class UDPFileParser {
 			} else {				
 				ArrayList<UDPData> existingList = map.get(key);
 				existingList.add(data);
-				map.put(key, existingList);
-				System.out.println("here i:" + i + " " + key);
+				map.put(key, existingList);				
 			}						
 			i++;			
 		}
