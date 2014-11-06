@@ -7,6 +7,7 @@ public class UDPData {
 	public UDPData(Integer size, Double time) {
 		this.packetSize = size;
 		this.time = time;
+		
 	}
 
 	public Integer getPacketSize() {
@@ -23,5 +24,6 @@ public class UDPData {
 
 	public void setTime(Double time) {
 		this.time = time;
-	}	
+	}
+	
 }

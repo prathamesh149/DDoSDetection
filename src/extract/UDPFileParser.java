@@ -10,7 +10,7 @@ import java.util.Map;
 
 class UDPFileParser {
 	
-	public static Map<UDPKey,ArrayList<UDPData>> getAssortedUDPMap(String url, Double base_time, Map<UDPKey,ArrayList<UDPData>> map) throws IOException {
+	public static Map<UDPKey,ArrayList<UDPData>> getAssortedUDPMap(String url, Double base_time, Map<UDPKey,ArrayList<UDPData>> map,String type) throws IOException {
 				
 		URL traceURL;
 		BufferedReader br = null;
@@ -40,7 +40,7 @@ class UDPFileParser {
 				time = time + base_time;					
 			}
 			
-			UDPKey key = new UDPKey(sourceIP, destIP, sourcePort, destPort);
+			UDPKey key = new UDPKey(sourceIP, destIP, sourcePort, destPort,type);
 			UDPData data = new UDPData(pktSize, time); 
 			
 			//Put in map
@@ -51,7 +51,8 @@ class UDPFileParser {
 			} else {				
 				ArrayList<UDPData> existingList = map.get(key);
 				existingList.add(data);
-				map.put(key, existingList);				
+				map.put(key, existingList);	
+				System.out.println("i: " + i + " " + key);
 			}						
 			i++;			
 		}
@@ -61,7 +62,6 @@ class UDPFileParser {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		String url = "http://www.lasr.cs.ucla.edu/ddos/traces/public/trace5/udp/file1";
-		
+		String url = "http://www.lasr.cs.ucla.edu/ddos/traces/public/trace5/udp/file1";		
 	}
 }

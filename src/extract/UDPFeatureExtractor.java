@@ -13,8 +13,14 @@ import java.util.Map;
 
 public class UDPFeatureExtractor {
 	
+	public static List<UDPFeature> getAllUDPFeatures(File f,String type) throws IOException {
+		Map<UDPKey,ArrayList<UDPData>> map = UDPFeatureExtractor.generateMapFromTraces(f,type);
+		List<UDPFeature> features = UDPFeatureExtractor.getUDPFeaturesFromMap(map);
+		return features;
+	}
+	
 	//A method that loops over urls in the file and generates a single map
-	public static Map<UDPKey,ArrayList<UDPData>> generateMapFromTraces(File f) throws IOException {
+	public static Map<UDPKey,ArrayList<UDPData>> generateMapFromTraces(File f,String type) throws IOException {
 		
 		BufferedReader br = new BufferedReader(new FileReader(f));
 		
@@ -23,20 +29,20 @@ public class UDPFeatureExtractor {
 		Double base_time = calculateBaseTime(firstURL);
 		Map<UDPKey,ArrayList<UDPData>> map = new HashMap<UDPKey,ArrayList<UDPData>>();
 		
-		map = UDPFileParser.getAssortedUDPMap(firstURL,base_time,map);
+		map = UDPFileParser.getAssortedUDPMap(firstURL,base_time,map,type);
 		
 		String line = null;
 		while ((line = br.readLine()) != null) {
-			map = UDPFileParser.getAssortedUDPMap(line,base_time,map);
+			map = UDPFileParser.getAssortedUDPMap(line,base_time,map,type);
 		}
 		
 		br.close();
 		return map;		
 	}
 	
-	
+		
 	//A method that returns the arraylist of 11 parameter values (7+4) from map
-	public static List<UDPFeature> getUDPFeatures(Map<UDPKey,ArrayList<UDPData>> map) {
+	public static List<UDPFeature> getUDPFeaturesFromMap(Map<UDPKey,ArrayList<UDPData>> map) {
 		
 		List<UDPFeature> features = new ArrayList<UDPFeature>();
 		
@@ -58,6 +64,7 @@ public class UDPFeatureExtractor {
 		String sourcePort = key.getSourcePort();
 		String destIP = key.getDestIP();
 		String destPort = key.getDestPort();
+		String packetType = key.getPacketType();
 		
 		int packets = value.size();
 		
@@ -70,6 +77,7 @@ public class UDPFeatureExtractor {
 		}
 			
 		Double averagePacketSize = (double) (bytes/packets);
+		
 		
 		Double te = value.get(packets-1).getTime();
 		Double ts = value.get(0).getTime();
@@ -93,7 +101,7 @@ public class UDPFeatureExtractor {
 			
 			for (int j=0; j<value.size();j++) {
 				timeDeviationSquares += (meanTime-value.get(j).getTime())*(meanTime-value.get(j).getTime());
-				sizeDeviationSquares += (meanPacketSize-value.get(j).getTime())*(meanPacketSize-value.get(j).getTime());
+				sizeDeviationSquares += (meanPacketSize-value.get(j).getPacketSize())*(meanPacketSize-value.get(j).getPacketSize());
 			}
 			
 			timeIntervalVariance = Math.sqrt(timeDeviationSquares/packets);
@@ -104,6 +112,9 @@ public class UDPFeatureExtractor {
 		feature.setSourcePort(sourcePort);
 		feature.setDestIP(destIP);
 		feature.setDestPort(destPort);
+		
+		feature.setPacketType(packetType);
+		
 		feature.setPackets(packets);
 		feature.setBytes(bytes);
 		feature.setAveragePacketSize(averagePacketSize);
@@ -127,11 +138,13 @@ public class UDPFeatureExtractor {
 		
  		return base_time;		
 	}
+	
+	
 		
 	public static void main(String[] args) throws IOException {		
-		File f = new File("src//extract//udp_normal_file_urls.txt");
-		Map<UDPKey,ArrayList<UDPData>> map = UDPFeatureExtractor.generateMapFromTraces(f);
-		List<UDPFeature> features = UDPFeatureExtractor.getUDPFeatures(map);
+		File f = new File("src//extract//udp_attack_file_urls.txt");
+		
+		List<UDPFeature> features = UDPFeatureExtractor.getAllUDPFeatures(f, "attack");
 		System.out.println();
 	}
 		

@@ -1,14 +1,14 @@
 package extract;
 
-public class UDPFeature {
+public class UDPNormalizedFeature {
 	
 	private String sourceIP;
 	private String sourcePort;
 	private String destIP;
 	private String destPort;
 	
-	private Integer packets;
-	private Integer bytes;
+	private Double packets;
+	private Double bytes;
 	
 	private Double averagePacketSize;
 	private Double packetRate;
@@ -17,7 +17,6 @@ public class UDPFeature {
 	private Double packetSizeVariance;
 	
 	private String packetType;
-	
 	
 	public String getSourceIP() {
 		return sourceIP;
@@ -43,16 +42,16 @@ public class UDPFeature {
 	public void setDestPort(String destPort) {
 		this.destPort = destPort;
 	}
-	public Integer getPackets() {
+	public Double getPackets() {
 		return packets;
 	}
-	public void setPackets(Integer packets) {
+	public void setPackets(Double packets) {
 		this.packets = packets;
 	}
-	public Integer getBytes() {
+	public Double getBytes() {
 		return bytes;
 	}
-	public void setBytes(Integer bytes) {
+	public void setBytes(Double bytes) {
 		this.bytes = bytes;
 	}
 	public Double getAveragePacketSize() {
@@ -90,5 +89,8 @@ public class UDPFeature {
 	}
 	public void setPacketType(String packetType) {
 		this.packetType = packetType;
-	}			
+	}
+	
+	
+		
 }
