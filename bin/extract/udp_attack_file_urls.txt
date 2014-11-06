@@ -1,4 +1,0 @@
-http://www.lasr.cs.ucla.edu/ddos/traces/public/attacktrace1/udp/file1
-http://www.lasr.cs.ucla.edu/ddos/traces/public/attacktrace1/udp/file2
-http://www.lasr.cs.ucla.edu/ddos/traces/public/attacktrace1/udp/file3
-http://www.lasr.cs.ucla.edu/ddos/traces/public/attacktrace1/udp/file4
