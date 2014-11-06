@@ -18,6 +18,16 @@ public class Test {
 		combined.addAll(attackFeatures);
 		
 		List<UDPNormalizedFeature> normalized = UDPNormalizer.normalize(combined);
-		System.out.println();
+		
+		List<UDPNormalizedFeature> normalizedNormalFeatures = new ArrayList<UDPNormalizedFeature>();
+		for (int i=0; i <normalFeatures.size(); i++) {
+			normalizedNormalFeatures.add(normalized.get(i));			
+		}
+		
+		List<UDPNormalizedFeature> normalizedAttackFeatures = new ArrayList<UDPNormalizedFeature>();
+		for (int j=normalFeatures.size() ; j <normalized.size(); j++) {
+			normalizedAttackFeatures.add(normalized.get(j));			
+		}
+				
 	}
 }
