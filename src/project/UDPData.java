@@ -1,4 +1,5 @@
-package extract;
+package project;
+
 
 public class UDPData {
 	private Integer packetSize;

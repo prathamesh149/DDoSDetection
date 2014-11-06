@@ -1,4 +1,4 @@
-package extract;
+package project;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +87,7 @@ public class UDPNormalizer {
 			normalizedFeature.setSourceIP(sourceIP);
 			normalizedFeature.setSourcePort(sourcePort);
 			normalizedFeature.setDestIP(destIP);
-			normalizedFeature.setDestIP(destPort);
+			normalizedFeature.setDestPort(destPort);
 			
 			normalizedFeature.setPackets(packetSizeVariance);
 			normalizedFeature.setBytes(bytes);
