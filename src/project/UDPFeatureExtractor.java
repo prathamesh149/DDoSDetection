@@ -61,7 +61,7 @@ public class UDPFeatureExtractor {
 		Double byteRate = 0.0;
 		Double timeIntervalVariance = 0.0;
 		Double packetSizeVariance = 0.0;
-		if (!(te.compareTo(ts)==0)) {
+		if (te.compareTo(ts) != 0) {
 			packetRate = packets/(te-ts);
 			byteRate = bytes/(te-ts);
 			Double meanTime = totalTime/packets;
@@ -100,7 +100,7 @@ public class UDPFeatureExtractor {
 		return base_time;
 	}
 	public static void main(String[] args) throws IOException {
-		File f = new File("src//extract//udp_attack_file_urls.txt");
+		File f = new File("src//extract//udp_attack_file_urls_ucla.txt");
 		List<UDPFeature> features = UDPFeatureExtractor.getAllUDPFeatures(f, "attack");
 		System.out.println();
 	}

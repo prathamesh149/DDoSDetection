@@ -7,14 +7,11 @@ import java.util.List;
 
 public class Test {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) throws IOException{
 		
-		File normalFile = new File("src//project//udp_normal_file_urls.txt");
+		File normalFile = new File("src//project//udp_normal_file_urls_ucla.txt");
 		List<UDPFeature> normalFeatures = UDPFeatureExtractor.getAllUDPFeatures(normalFile, "normal");
-		File attackFile = new File("src//project//udp_attack_file_urls.txt");
+		File attackFile = new File("src//project//udp_attack_file_urls_ucla.txt");
 		List<UDPFeature> attackFeatures = UDPFeatureExtractor.getAllUDPFeatures(attackFile, "attack");
 		List<UDPFeature> combined = new ArrayList<UDPFeature>();
 		
@@ -51,7 +48,6 @@ public class Test {
 		
 		knn.trainingSamples = trainingList;
 		knn.testSamples = testList;
-		//knn.magic();
+		knn.magic();
 	}
-
 }

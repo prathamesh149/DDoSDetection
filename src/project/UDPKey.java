@@ -52,6 +52,13 @@ public class UDPKey {
 					&& this.packetType.equals(key.getPacketType())) {
 				result = true;
 			}
+			
+			/*if (this.sourceIP.equals(key.getSourceIP())
+					&& this.destIP.equals(key.getDestIP())
+					&& this.packetType.equals(key.getPacketType())) {
+				result = true;
+			}*/
+			
 		}
 		return result;
 	}
